@@ -6,7 +6,7 @@ import javax.swing.*;
 /**
  * LICENSE: This is open-source software released under the terms of the<BR>
  * GPL (http://www.gnu.org/licenses/gpl.html).<BR><BR>
- * 
+ *
  * This class implements a panel for displaying an image.
  */
 public class ImagePanel extends JPanel{
