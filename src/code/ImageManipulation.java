@@ -136,27 +136,27 @@ public class ImageManipulation {
     public static void edgeDetection(String pathToFile, int threshold) {
         new ImageSobel();
 
-//        APImage image = new APImage();
+        APImage image = new APImage();
 
-//        for (Pixel p : image) {
-//            p.clone();
-//            int red = p.getRed()-threshold;
-//            int green = p.getGreen()-threshold;
-//            int blue = p.getBlue()-threshold;
-//
-//            int average = (red + green + blue) / 3;
-//            if (average > 128) {
-//                average = 0;
-//            } else {
-//                average = 255;
-//
-//            }
-//            p.setBlue(average);
-//            p.setGreen(average);
-//            p.setRed(average);
-//
-//        }
-//        image.draw();
+        for (Pixel p : image) {
+            p.clone();
+            int red = p.getRed()-threshold;
+            int green = p.getGreen()-threshold;
+            int blue = p.getBlue()-threshold;
+
+            int average = (red + green + blue) / 3;
+            if (average > 128) {
+                average = 0;
+            } else {
+                average = 255;
+
+            }
+            p.setBlue(average);
+            p.setGreen(average);
+            p.setRed(average);
+
+        }
+        image.draw();
 
 
     }
@@ -167,8 +167,22 @@ public class ImageManipulation {
      * INPUT: the complete path file name of the image
      * OUTPUT: the image reflected about the y-axis
      */
-    public static void reflectImage(String pathToFile) {
+    public static void reflectImage(String image) {
+        APImage image3 = new APImage(image);
 
+        int height = image3.getHeight();
+        int width = image3.getWidth();
+
+        for (int w = width / 2; w > 0; w--){
+            for (int h = height - 1; h > 0; h--){
+                Pixel temp1 = image3.getPixel(w, h);
+                Pixel temp2 = image3.getPixel(width - w, h);
+
+                image3.setPixel(width - w, h, temp1);
+                image3.setPixel(w, h, temp2);
+            }
+        }
+        image3.draw();
     }
 
     /**
@@ -177,8 +191,17 @@ public class ImageManipulation {
      * INPUT: the complete path file name of the image
      * OUTPUT: the image rotated 90 degrees CLOCKWISE
      */
-    public static void rotateImage(String pathToFile) {
+    public static void rotateImage(String image) {
+        APImage image1 = new APImage(image);
+        APImage image2 = new APImage(image1.getHeight(), image1.getWidth());
 
+        for (int w = 1; w < image1.getWidth(); w++) {
+            for (int h = 1; h < image1.getHeight(); h++) {
+                Pixel pixel = image1.getPixel(w, h);
+                image2.setPixel((image1.getHeight() - h - 1), w, pixel);
+            }
+        }
+        image2.draw();
     }
 
 }
